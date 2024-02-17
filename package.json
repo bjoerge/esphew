@@ -1,10 +1,10 @@
 {
   "urls": [
-    ["esphew/__init__.py", "github:pimoroni/esphew/esphew/__init__.py"],
-    ["esphew/dns.py", "github:pimoroni/esphew/esphew/dns.py"],
-    ["esphew/logging.py", "github:pimoroni/esphew/esphew/logging.py"],
-    ["esphew/server.py", "github:pimoroni/esphew/esphew/server.py"],
-    ["esphew/template.py", "github:pimoroni/esphew/esphew/template.py"]
+    ["esphew/__init__.py", "github:bjoerge/esphew/esphew/__init__.py"],
+    ["esphew/dns.py", "github:bjoerge/esphew/esphew/dns.py"],
+    ["esphew/logging.py", "github:bjoerge/esphew/esphew/logging.py"],
+    ["esphew/server.py", "github:bjoerge/esphew/esphew/server.py"],
+    ["esphew/template.py", "github:bjoerge/esphew/esphew/template.py"]
   ],
   "deps": [
   ],
