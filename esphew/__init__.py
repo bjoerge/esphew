@@ -6,7 +6,7 @@ __version__ = "0.0.2"
 import gc, os, machine
 gc.threshold(50000)
 
-# phew! the Pico (or Python) HTTP Endpoint Wrangler
+# esphew! the ESP32 port of phew! the Pico (or Python) HTTP Endpoint Wrangler
 from . import logging
 
 # determine if remotely mounted or not, changes some behaviours like

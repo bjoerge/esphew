@@ -1,14 +1,14 @@
-# **phew!** the Pico (or Python) HTTP Endpoint Wrangler
+# **esphew!** the ESP32 port of **phew!** the Pico (or Python) HTTP Endpoint Wrangler
 
 A small webserver and templating library specifically designed for MicroPython
 on the Pico W. It aims to provide a complete toolkit for easily creating high
 quality web based interfaces for your projects.
 
-**phew!** is ideal for creating web based provisioning interfaces for connected projects
+**esphew!** is ideal for creating web based provisioning interfaces for connected projects
 using the [Raspberry Pi Pico W](https://shop.pimoroni.com/products/raspberry-pi-pico-w).
 
-- [**phew!** the Pico (or Python) HTTP Endpoint Wrangler](#phew-the-pico-or-python-http-endpoint-wrangler)
-  - [What **phew!** does:](#what-phew-does)
+- [**esphew!** the ESP32 port of **phew!** the Pico (or Python) HTTP Endpoint Wrangler](#esphew-the-pico-or-python-http-endpoint-wrangler)
+  - [What **esphew!** does:](#what-esphew-does)
   - [How to use](#how-to-use)
   - [Basic example](#basic-example)
   - [Function reference](#function-reference)
@@ -42,7 +42,7 @@ using the [Raspberry Pi Pico W](https://shop.pimoroni.com/products/raspberry-pi-
       - [get\_ip\_address](#get_ip_address)
   - [Other Resources](#other-resources)
 
-## What **phew!** does:
+## What **esphew!** does:
 
 - a basic web server
 - optimised for speed (at `import` and during execution)
@@ -56,13 +56,13 @@ using the [Raspberry Pi Pico W](https://shop.pimoroni.com/products/raspberry-pi-
 - string, byte, or generator based responses
 - `connect_to_wifi` and `access_point` convenience methods
 
-Where possible **phew!** tries to minimise the amount of code and setup that you,
+Where possible **esphew!** tries to minimise the amount of code and setup that you,
 the developer, has to do in favour of picking sane defaults and hiding away bits
 of minutiae that rarely needs to be tweaked.
 
 ## How to use
 
-**phew!** can be installed using [pip](https://pypi.org/project/micropython-phew/) from the command line or from your favourite IDE. In Thonny this can be achieved by clicking `Tools` -> `Manage packages` and searching for `micropython-phew`.
+**esphew!** can be installed using [pip](https://pypi.org/project/micropython-esphew/) from the command line or from your favourite IDE. In Thonny this can be achieved by clicking `Tools` -> `Manage packages` and searching for `micropython-esphew`.
 
 ## Basic example
 
@@ -70,9 +70,10 @@ An example web server that returns a random number between 1 and 100 (or optiona
 the range specified by the callee) when requested:
 
 ```python
-from phew import server, connect_to_wifi
+from esphew import server, connect_to_wifi
 
 connect_to_wifi("<ssid>", "<password>")
+
 
 @server.route("/random", methods=["GET"])
 def random_number(request):
@@ -81,14 +82,16 @@ def random_number(request):
   max = int(request.query.get("max", 100))
   return str(random.randint(min, max))
 
+
 @server.catchall()
 def catchall(request):
   return "Not found", 404
 
+
 server.run()
 ```
 
-**phew** is designed specifically with performance and minimal resource use in mind.
+**esphew** is designed specifically with performance and minimal resource use in mind.
 Generally this means it will prioritise doing as little work as possible including 
 assuming the correctness of incoming requests.
 
@@ -245,7 +248,7 @@ A web server isn't much use without something to serve. While it's straightforwa
 to serve the contents of a file or some generated JSON things get more complicated
 when we want to present a dynamically generated web page to the user.
 
-**phew!** provides a templating engine which allows you to write normal HTML with 
+**esphew!** provides a templating engine which allows you to write normal HTML with 
 fragments of Python code embedded to output variable values, parse input, or dynamically
 load assets.
 
@@ -267,7 +270,7 @@ of your handler methods.
 
 #### Template expressions
 
-Templates are not much use if you can't inject dynamic data into them. With **phew!**
+Templates are not much use if you can't inject dynamic data into them. With **esphew!**
 you can embed Python expressions with `{{<expression here>}}` which will be evaluated 
 during parsing.
 
@@ -405,7 +408,7 @@ Truncation always happens on the nearest line ending boundary so the truncated f
 
 ### dns module
 
-To make implementing device provisioning interfaces (via captive portal) simple **phew!** provides a catchall DNS server.
+To make implementing device provisioning interfaces (via captive portal) simple **esphew!** provides a catchall DNS server.
 
 If you put the Pico W into access point mode and then run the catchall DNS server it will route all DNS requests back to the local device so that they can be handled.
 
@@ -455,8 +458,8 @@ Returns the current IP address if connected to a network or acting as an access 
 
 ## Other Resources
 
-Here are some Phew! community projects and guides that you might find useful. Note that code at the links below has not been tested by us and we're not able to offer support with it.
+Here are some esphew! community projects and guides that you might find useful. Note that code at the links below has not been tested by us and we're not able to offer support with it.
 
 - :link: [Hacking Big Mouth Billy Bass](https://www.youtube.com/watch?v=dOEjfBplueM)
-- :link: [How to set up a Phew! Access Point](https://www.kevsrobots.com/blog/phew-access-point.html)
+- :link: [How to set up a phew! Access Point](https://www.kevsrobots.com/blog/phew-access-point.html)
 - :link: [Wireless Networking Setup Example for Raspberry Pi Pico W](https://github.com/simonprickett/phewap)

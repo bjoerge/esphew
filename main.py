@@ -8,8 +8,8 @@
 #
 # with your wifi details instead of <ssid> and <password>.
 
-from phew import server, connect_to_wifi
-from phew.template import render_template
+from esphew import server, connect_to_wifi
+from esphew.template import render_template
 
 import secrets
 
