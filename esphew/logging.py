@@ -17,6 +17,10 @@ _logging_types = LOG_INFO | LOG_WARNING | LOG_ERROR | LOG_EXCEPTION
 _log_truncate_at = 11 * 1024
 _log_truncate_to =  8 * 1024
 
+_flush_threshold = 10
+
+_BUFFER = []
+
 def datetime_string():
   dt = machine.RTC().datetime()
   return "{0:04d}-{1:02d}-{2:02d} {4:02d}:{5:02d}:{6:02d}".format(*dt)
@@ -71,7 +75,7 @@ def truncate(file, target_size):
       # now copy the rest of the file
       while True:
         chunk = infile.read(1024)
-        if not chunk: 
+        if not chunk:
           break
         outfile.write(chunk)
 
@@ -80,15 +84,24 @@ def truncate(file, target_size):
   os.rename(file + ".tmp", file)
 
 
-def log(level, text):
-  datetime = datetime_string()
-  log_entry = "{0} [{1:8} /{2:>4}kB] {3}".format(datetime, level, round(gc.mem_free() / 1024), text)
-  print(log_entry)
-  with open(log_file, "a") as logfile:
-    logfile.write(log_entry + '\n')
+def flush():
+  global _BUFFER
+  with open(log_file, "a") as f:
+      for line in _BUFFER:
+        f.write(line + "\n")
+  _BUFFER = []
 
   if _log_truncate_at and file_size(log_file) > _log_truncate_at:
     truncate(log_file, _log_truncate_to)
+
+def log(level, text):
+  global _BUFFER
+  datetime = datetime_string()
+  log_entry = "{0} [{1:8} /{2:>4}kB] {3}".format(datetime, level, round(gc.mem_free() / 1024), text)
+  print(log_entry)
+  _BUFFER.append(log_entry)
+  if _flush_threshold and len(_BUFFER) >= _flush_threshold:
+    flush()
 
 def info(*items):
   if _logging_types & LOG_INFO:
